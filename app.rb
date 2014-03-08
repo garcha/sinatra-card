@@ -10,7 +10,7 @@ class Card < ActiveRecord::Base
   validates :name, presence: true
   validates :phone, presence: true
 end
-
+# get all the cards
 get "/" do
   @cards = Card.order("created_at DESC")
   @title = "Welcome"
@@ -27,12 +27,12 @@ helpers do
   end
 end
 
+#create a card
 get "/cards/create" do
  @title = "Create card"
  @card = Card.new
  erb :"cards/create"
 end
-
 post "/cards" do
  @card = Card.new(params[:card])
  if @card.save
@@ -42,8 +42,21 @@ post "/cards" do
  end
 end
 
+#view post
 get "/cards/:id" do
  @card = Card.find(params[:id])
- @name = @card.name
+ @title = @card.name
  erb :"cards/view"
+end
+
+#edit post
+get "/cards/:id/edit" do
+  @card = Card.find(params[:id])
+  @title = "Edit Card"
+  erb :"cards/edit"
+end
+put "/cards/:id" do
+  @card = Card.find(params[:id])
+  @card.update(params[:post])
+  redirect "posts/#{@post.id}"
 end
