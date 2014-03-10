@@ -20,7 +20,7 @@ end
 helpers do
   def title
     if @title
-      "#@{title}"
+      "#{@title}"
     else
       "Welcome"
     end
@@ -57,6 +57,9 @@ get "/cards/:id/edit" do
 end
 put "/cards/:id" do
   @card = Card.find(params[:id])
-  @card.update(params[:post])
-  redirect "posts/#{@post.id}"
+  if @card.update_attributes(params[:card])
+    redirect "/cards/#{@card.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
+  else
+    redirect "cards/:id/edit", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
+  end
 end

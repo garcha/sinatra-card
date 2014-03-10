@@ -1,2 +1,25 @@
-<h1><%= @card.name %></h1>
-<p><%= @card.phone %></p>
+<h2>Your Medical ID card info</h2>
+
+<p>Name: <%= @card.name %></p>
+<p>Address: <%= @card.address1 %></p>
+<p>Address: <%= @card.address2 %></p>
+<p>Phone Number: <%= @card.phone %></p>
+<p>Date of Birth: <%= @card.dob %></p>
+<p>Emergency Contact: <%= @card.em_contact %></p>
+<p>Emergency Phone Number:<%= @card.em_phone %></p>
+<p>Doctor<%= @card.doctor %></p>
+<p>Doctor's Phone number: <%= @card.doc_phone %></p>
+<p>Insurance Provider: <%= @card.insurance %></p>
+<p>Insurance Information: <%= @card.insur_numner %></p>
+<p>Insurance Phone number: <%= @card.insur_phone %></p>
+<p>Medical History: <%= @card.medical_history1 %></p>
+<p>Medical History: <%= @card.medical_history2 %></p>
+<p>Medical History: <%= @card.medical_history3 %></p>
+<p>Medical History: <%= @card.medical_history4 %></p>
+<p>Medical History: <%= @card.medical_history5 %></p>
+<p>Medication: <%= @card.medication1 %></p>
+<p>Medication: <%= @card.medication2 %></p>
+<p>Medication: <%= @card.medication3 %></p>
+<p>Medication: <%= @card.medication4 %></p>
+<p>Medication: <%= @card.medication5 %></p>
+<a href="/cards/<%= @card.id %>/edit">Edit Card</a>

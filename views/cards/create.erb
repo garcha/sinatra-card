@@ -1,7 +1,7 @@
 <h2>Create Post</h2>
 <br/>
-<form method='POST' action='/cards' role='form'>
-  <div class="form-group">
+
+<!--   <div class="form-group">
     <label for="card_name">Name:</label>
     <input id="name" type='text' name='card[name]' class='form-control'>
   </div>
@@ -12,4 +12,119 @@
   </div>
 
   <button type="submit" class="btn btn-success">Submit</button>
+</form> -->
+
+<form class="form-inline" role="form" method='POST' action='/cards'>
+
+  <div class="form-group">
+    <label class="control-label" for="card_name">Name:</label>
+    <input id="name" type='text' name='card[name]' class='form-control'>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="card_phone">Phone Number:</label>
+    <input id="phone" type='integer' name='card[phone]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="address1">Address:</label>
+    <input id="address1" type='text' name='card[address1]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="address2">Address:</label>
+    <input id="address2" type='text' name='card[address2]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="dob">Date of Birth:</label>
+    <input id="dob" type='text' name='card[dob]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="em_contact">Emergency Contact:</label>
+    <input id="em_contact" type='text' name='card[em_contact]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="em_phone">Emergency Phone number:</label>
+    <input id="em_phone" type='integer' name='card[em_phone]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="doctor">Doctor:</label>
+    <input id="doctor" type='text' name='card[doctor]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="doc_phone">Doctor's phone number:</label>
+    <input id="doc_phone" type='integer' name='card[doc_phone]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="insurance">Insurance provider:</label>
+    <input id="insurance" type='text' name='card[insurance]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="insur_numner">Insurance id number:</label>
+    <input id="insur_numner" type='text' name='card[insur_numner]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medical_history1">Medical condition:</label>
+    <input id="medical_history1" type='text' name='card[medical_history1]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medical_history2">Medical condition:</label>
+    <input id="medical_history2" type='text' name='card[medical_history2]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medical_history3">Medical condition:</label>
+    <input id="medical_history3" type='text' name='card[medical_history3]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medical_history4">Medical condition:</label>
+    <input id="medical_history4" type='text' name='card[medical_history4]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medical_history5">Medical condition:</label>
+    <input id="medical_history5" type='text' name='card[medical_history5]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medication1">Medication:</label>
+    <input id="medication1" type='text' name='card[medication1]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medication2">Medication:</label>
+    <input id="medication2" type='text' name='card[medication2]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medication3">Medication:</label>
+    <input id="medication3" type='text' name='card[medication3]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medication4">Medication:</label>
+    <input id="medication4" type='text' name='card[medication4]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="medication5">Medication:</label>
+    <input id="medication5" type='text' name='card[medication5]'>
+  </div>
+  <br>
+<!--   <div class="form-group">
+    <label class="control-label" for="pvc">Address1:</label>
+    <input id="pvc" type='boolean' name='card[pvc]'>
+  </div>
+  <br> -->
+  <button type="submit" class="btn btn-success">Submit</button>
+
 </form>
