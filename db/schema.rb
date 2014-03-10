@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303035100) do
+ActiveRecord::Schema.define(version: 20140310021156) do
+
+  create_table "addresses", force: true do |t|
+    t.integer "card_id"
+    t.string  "name"
+    t.string  "address"
+    t.string  "address1"
+    t.string  "address2"
+    t.integer "phone"
+    t.string  "email"
+  end
 
   create_table "cards", force: true do |t|
     t.string   "name"

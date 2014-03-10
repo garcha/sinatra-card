@@ -10,6 +10,11 @@ class Card < ActiveRecord::Base
   validates :name, presence: true
   validates :phone, presence: true
 end
+
+class Address < ActiveRecord::Base
+  belongs_to :card
+end
+
 # get all the cards
 get "/" do
   @cards = Card.order("created_at DESC")
@@ -62,4 +67,26 @@ put "/cards/:id" do
   else
     redirect "cards/:id/edit", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
   end
+end
+
+#Address create
+get "/address/create" do
+  @title = "Shipping address"
+  @address = Address.new
+  erb :"addresses/create"
+end
+
+post "/addresses" do
+  @address = Address.new(params[:address])
+  if @address.save
+    redirect "addresses/#{@address.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
+  else
+    erb :"addresses/create", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
+  end
+end
+
+get "/addresses/:id" do
+  @address = Address.find(params[:id])
+  @title = @address.name
+  erb :"addresses/view"
 end
