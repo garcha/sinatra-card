@@ -1,4 +1,53 @@
-<h2>Your Medical ID card info</h2>
+
+<div>
+<h2>Add your shipping address</h2>
+<br/>
+
+<form class="form-inline" role="form" method='POST' action='/addresses'>
+
+  <div class="form-group">
+    <label class="control-label" for="name">Name:</label>
+    <input id="name" type='text' name='address[name]' class='form-control'>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="address">Address:</label>
+    <input id="address" type='text' name='address[address]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="address1">Address:</label>
+    <input id="address1" type='text' name='address[address1]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="address2">Address:</label>
+    <input id="address2" type='text' name='address[address2]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="email">Email:</label>
+    <input id="email" type='text' name='address[email]'>
+  </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="phone">Phone number:</label>
+    <input id="phone" type='integer' name='address[phone]'>
+  </div>
+  <br>
+<!--   <div class="form-group">
+    <label class="control-label" for="pvc">Address1:</label>
+    <input id="pvc" type='boolean' name='card[pvc]'>
+  </div>
+  <br> -->
+  <input type="hidden" name='address[card_id]' value="<%= @card.id%>">
+  <button type="submit" class="btn btn-success">Submit</button>
+
+</form>
+</div>
+
+<div>
+
+  <h2>Your Medical ID card info</h2>
 
 <p>Name: <%= @card.name %></p>
 <p>Address: <%= @card.address1 %></p>
@@ -23,3 +72,5 @@
 <p>Medication: <%= @card.medication4 %></p>
 <p>Medication: <%= @card.medication5 %></p>
 <a href="/cards/<%= @card.id %>/edit">Edit Card</a>
+
+</div>

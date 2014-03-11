@@ -50,7 +50,8 @@ end
 #view post
 get "/cards/:id" do
  @card = Card.find(params[:id])
- @title = @card.name
+ @title = "Shipping address"
+ @address = Address.new
  erb :"cards/view"
 end
 
@@ -69,12 +70,12 @@ put "/cards/:id" do
   end
 end
 
-#Address create
-get "/address/create" do
-  @title = "Shipping address"
-  @address = Address.new
-  erb :"addresses/create"
-end
+# #Address create
+# get "/address/create" do
+#   @title = "Shipping address"
+#   @address = Address.new
+#   erb :"addresses/create"
+# end
 
 post "/addresses" do
   @address = Address.new(params[:address])
