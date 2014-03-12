@@ -3,6 +3,12 @@ require 'sinatra/activerecord'
 require './environments'
 require 'sinatra/flash'
 require 'sinatra/redirect_with_flash'
+require 'stripe'
+
+set :publishable_key, ENV['PUBLISHABLE_KEY']
+set :secret_key, ENV['SECRET_KEY']
+
+Stripe.api_key = settings.secret_key
 
 enable :sessions
 
@@ -63,11 +69,8 @@ get "/cards/:id/edit" do
 end
 put "/cards/:id" do
   @card = Card.find(params[:id])
-  if @card.update_attributes(params[:card])
-    redirect "/cards/#{@card.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
-  else
-    redirect "cards/:id/edit", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
-  end
+  @card.update_attributes(params[:card])
+  redirect "/cards/#{@card.id}"
 end
 
 # #Address create
@@ -90,4 +93,22 @@ get "/addresses/:id" do
   @address = Address.find(params[:id])
   @title = @address.name
   erb :"addresses/view"
+end
+
+post '/charge' do
+  @amount = 500
+
+  customer = Stripe::Customer.create(
+    :email => address.email,
+    :card  => params[:stripeToken]
+  )
+
+  charge = Stripe::Charge.create(
+    :amount      => @amount,
+    :description => 'Sinatra Charge',
+    :currency    => 'usd',
+    :customer    => address.name
+  )
+
+  erb :addresses/thanks.erb
 end

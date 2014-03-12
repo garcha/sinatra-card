@@ -7,6 +7,7 @@ gem 'sinatra-activerecord'
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
 gem 'sinatra-formhelpers-ng'
+gem 'stripe'
 
 group :development do
   gem 'sqlite3'
@@ -16,4 +17,3 @@ end
 group :production do
   gem 'pg'
 end
-
