@@ -21,6 +21,11 @@ class Address < ActiveRecord::Base
   belongs_to :card
 end
 
+class Purchase < ActiveRecord::Base
+	belongs_to :address
+end
+
+
 # get all the cards
 get "/" do
   @cards = Card.order("created_at DESC")
@@ -99,7 +104,7 @@ post '/charge' do
   @amount = 500
 
   customer = Stripe::Customer.create(
-    :email => address.email,
+    :email => @address.email,
     :card  => params[:stripeToken]
   )
 
@@ -107,7 +112,7 @@ post '/charge' do
     :amount      => @amount,
     :description => 'Sinatra Charge',
     :currency    => 'usd',
-    :customer    => address.name
+    :customer    => @address.name
   )
 
   erb :addresses/thanks.erb
