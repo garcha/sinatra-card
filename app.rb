@@ -74,7 +74,7 @@ get "/cards/:id/edit" do
 end
 put "/cards/:id" do
   @card = Card.find(params[:id])
-  @card.update_attributes(params[:card])
+  @card.update(params[:card])
   redirect "/cards/#{@card.id}"
 end
 
@@ -94,26 +94,33 @@ post "/addresses" do
   end
 end
 
+
+
 get "/addresses/:id" do
+  @@address = Address.find(params[:id])
   @address = Address.find(params[:id])
   @title = @address.name
   erb :"addresses/view"
 end
 
-post '/charge' do
+post '/addresses/charge' do
+  # Amount in cents
   @amount = 500
 
   customer = Stripe::Customer.create(
-    :email => @address.email,
+    :email => @@address.email,
     :card  => params[:stripeToken]
   )
 
   charge = Stripe::Charge.create(
     :amount      => @amount,
-    :description => 'Sinatra Charge',
+    :description => 'MedicalIDOne Card',
     :currency    => 'usd',
-    :customer    => @address.name
+    :customer    => @@address.id
   )
 
-  erb :addresses/thanks.erb
+  erb :'addresses/charge'
+
 end
+
+

@@ -1,9 +1,6 @@
 <h2>Make your payment</h2>
 
-<form action="/charge" method="post">
-	<input type="hidden" name='purchase[address_id]' value="<%= @address.id%>">
-	<input type="hidden" name='purchase[stripeEmail]' value=>
-	<input type="hidden" name='purchase[stripeToken]' >
+<form action="/addresses/charge" method="post">
     <article>
       <label class="amount">
         <span>Amount: $5.00</span>
