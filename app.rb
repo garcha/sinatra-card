@@ -4,6 +4,7 @@ require './environments'
 require 'sinatra/flash'
 require 'sinatra/redirect_with_flash'
 require 'stripe'
+require 'aws-sdk'
 
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
