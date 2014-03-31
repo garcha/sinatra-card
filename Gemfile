@@ -8,7 +8,10 @@ gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
 gem 'sinatra-formhelpers-ng'
 gem 'stripe'
-gem 'aws-sdk', '~> 1.0'
+gem 'carrierwave'
+#gem 'aws-s3'
+gem 'rmagick'
+gem 'fog'
 
 group :development do
   gem 'sqlite3'

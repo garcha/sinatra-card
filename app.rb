@@ -4,19 +4,46 @@ require './environments'
 require 'sinatra/flash'
 require 'sinatra/redirect_with_flash'
 require 'stripe'
-require 'aws-sdk'
+require 'carrierwave'
+require 'rmagick'
+require 'fog'
+
 
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
 
 Stripe.api_key = settings.secret_key
 
+# helpers do
+#   def upload(filename, file)
+#     bucket = 'medicalidus'
+#     AWS::S3::Base.establish_connection!(
+#       :access_key_id     => ENV['ACCESS_KEY_ID'],
+#       :secret_access_key => ENV['SECRET_ACCESS_KEY']
+#     )
+#     AWS::S3::S3Object.store(
+#       filename,
+#       open(file.path),
+#       bucket
+#     )
+#     return filename
+#   end
+# end
+
 enable :sessions
 
 class Card < ActiveRecord::Base
-  validates :name, presence: true
-  validates :phone, presence: true
+  # validates :name, presence: true
+  # validates :phone, presence: true
+  # has_attached_file :photo,
+    # :storage => :s3,
+    # :bucket => 'medicalidus',
+    # :s3_credentials => {
+    #   :access_key_id => 'AWS_ACCESS_KEY_ID',
+    #   :secret_access_key => 'AWS_SECRET_ACCESS_KEY'
+    # }
 end
+
 
 class Address < ActiveRecord::Base
   belongs_to :card
@@ -26,12 +53,26 @@ class Purchase < ActiveRecord::Base
 	belongs_to :address
 end
 
+CarrierWave.configure do |config|
+  config.fog_credentials = {
+    :provider               => 'AWS',
+    :aws_access_key_id      => 'AWS_ACCESS_KEY_ID',
+    :aws_secret_access_key  => 'AWS_SECRET_ACCESS_KEY'
+  }
+  config.fog_directory  = 'medicalidus'
+end
 
-# get all the cards
-get "/" do
-  @cards = Card.order("created_at DESC")
-  @title = "Welcome"
-  erb :"cards/index"
+class MyUploader < CarrierWave::Uploader::Base
+  include CarrierWave::RMagick
+  version :thumb do
+    process :resize_to_fill => [200,200]
+  end
+
+  storage :fog
+end
+
+class Upload < Sequel::Model
+  mount_uploader :file, MyUploader
 end
 
 helpers do
@@ -43,6 +84,25 @@ helpers do
     end
   end
 end
+
+
+# get all the cards
+get "/" do
+  @uploads = Upload.all
+  erb :"cards/index"
+  # @cards = Card.order("created_at DESC")
+  # @title = "Welcome"
+  # erb :"cards/index"
+end
+
+post '/upload' do
+  upload = Upload.new
+  upload.file = params[:image]
+  upload.save
+  redirect to('/')
+  #upload(params[:content]['file'][:filename], params[:content]['file'][:tempfile])
+end
+
 
 #create a card
 get "/cards/create" do
@@ -123,5 +183,3 @@ post '/addresses/charge' do
   erb :'addresses/charge'
 
 end
-
-
