@@ -1,3 +1,7 @@
+require 'carrierwave'
+require 'carrierwave/orm/activerecord'
+
+
 configure :development do
   set :database, 'sqlite:///dev.db'
   set :show_exceptions, true

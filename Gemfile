@@ -7,6 +7,13 @@ gem 'sinatra-activerecord'
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
 gem 'sinatra-formhelpers-ng'
+gem 'stripe'
+gem 'carrierwave'
+#gem 'aws-s3'
+gem 'rmagick'
+gem 'fog'
+gem 'carrierwave_direct'
+gem 'haml'
 
 group :development do
   gem 'sqlite3'
@@ -16,4 +23,3 @@ end
 group :production do
   gem 'pg'
 end
-
