@@ -17,22 +17,6 @@ set :secret_key, ENV['SECRET_KEY']
 
 Stripe.api_key = settings.secret_key
 
-# helpers do
-#   def upload(filename, file)
-#     bucket = 'medicalidus'
-#     AWS::S3::Base.establish_connection!(
-#       :access_key_id     => ENV['ACCESS_KEY_ID'],
-#       :secret_access_key => ENV['SECRET_ACCESS_KEY']
-#     )
-#     AWS::S3::S3Object.store(
-#       filename,
-#       open(file.path),
-#       bucket
-#     )
-#     return file.key
-#   end
-# end
-
 enable :sessions
 
 CarrierWave.configure do |config|
@@ -47,30 +31,23 @@ end
 
 class MyUploader < CarrierWave::Uploader::Base
   storage :fog
+
+  def extension_white_list
+    %w(jpg jpeg gif png)
+  end
 end
 
 class Upload < ActiveRecord::Base
   mount_uploader :filepath, MyUploader
+  belongs_to :card
 end
 
 class Card < ActiveRecord::Base
 
   # validates :name, presence: true
   # validates :phone, presence: true
-  # has_attached_file :photo,
-    # :storage => :s3,
-    # :bucket => 'medicalidus',
-    # :s3_credentials => {
-    #   :access_key_id => 'AWS_ACCESS_KEY_ID',
-    #   :secret_access_key => 'AWS_SECRET_ACCESS_KEY'
-    # }
+
 end
-
-# class ImageUploader < CarrierWave::Uploader::Base
-#   storage CarrierWaveDirect::Uploader
-# end
-
-
 
 class Address < ActiveRecord::Base
   belongs_to :card
@@ -79,17 +56,6 @@ end
 class Purchase < ActiveRecord::Base
 	belongs_to :address
 end
-
-
-
-#class MyUploader < CarrierWave::Uploader::Base
-#  include CarrierWave::RMagick
-#  version :thumb do
-#    process :resize_to_fill => [200,200]
-#  end
-#  storage :fog
-#end
-
 
 helpers do
   def title
@@ -170,8 +136,6 @@ post "/addresses" do
     erb :"addresses/create", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
   end
 end
-
-
 
 get "/addresses/:id" do
   @@address = Address.find(params[:id])
