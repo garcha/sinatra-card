@@ -38,8 +38,8 @@ enable :sessions
 CarrierWave.configure do |config|
   config.fog_credentials = {
     :provider               => 'AWS',
-    :aws_access_key_id      => 'AWS_ACCESS_KEY_ID',
-    :aws_secret_access_key  => 'AWS_SECRET_ACCESS_KEY',
+    :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],
+    :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY'],
     :region                 => "us-east-1"
   }
   config.fog_directory  = 'medicalidus'
@@ -103,10 +103,10 @@ end
 
 
 #get all the cards
-get "/upload" do
-  #  @cards = Card.order("created_at DESC")
-  #  @title = "Welcome"
-  @uploads = Upload.all
+get "/" do
+  @cards = Card.order("created_at DESC")
+  @title = "Welcome"
+  @upload = Upload.last
   erb :"cards/index"
 
 end
@@ -116,7 +116,7 @@ post '/upload' do
    upload.filepath = params[:image]
    upload.save
   #  upload(params[:content]['file'][:filename], params[:content]['file'][:tempfile])
-   redirect to('/upload')
+   redirect to('/')
 end
 
 

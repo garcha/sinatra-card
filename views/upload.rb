@@ -3,5 +3,5 @@
       <input type="submit" name="submit" value="Upload" />
 </form>
     <% @uploads.each do |upload| %>
-      <img src="<%= upload.file.url %>" />
+      <img src="<%= upload.filepath.url %>" />
     <% end %>
