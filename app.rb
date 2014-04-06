@@ -7,7 +7,10 @@ require 'stripe'
 require 'carrierwave'
 require 'rmagick'
 require 'fog'
-
+require 'carrierwave_direct'
+require 'haml'
+require 'carrierwave/orm/activerecord'
+#require 'aws/s3'
 
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
@@ -26,13 +29,32 @@ Stripe.api_key = settings.secret_key
 #       open(file.path),
 #       bucket
 #     )
-#     return filename
+#     return file.key
 #   end
 # end
 
 enable :sessions
 
+CarrierWave.configure do |config|
+  config.fog_credentials = {
+    :provider               => 'AWS',
+    :aws_access_key_id      => 'AWS_ACCESS_KEY_ID',
+    :aws_secret_access_key  => 'AWS_SECRET_ACCESS_KEY',
+    :region                 => "us-east-1"
+  }
+  config.fog_directory  = 'medicalidus'
+end
+
+class MyUploader < CarrierWave::Uploader::Base
+  storage :fog
+end
+
+class Upload < ActiveRecord::Base
+  mount_uploader :filepath, MyUploader
+end
+
 class Card < ActiveRecord::Base
+
   # validates :name, presence: true
   # validates :phone, presence: true
   # has_attached_file :photo,
@@ -44,6 +66,11 @@ class Card < ActiveRecord::Base
     # }
 end
 
+# class ImageUploader < CarrierWave::Uploader::Base
+#   storage CarrierWaveDirect::Uploader
+# end
+
+
 
 class Address < ActiveRecord::Base
   belongs_to :card
@@ -53,27 +80,16 @@ class Purchase < ActiveRecord::Base
 	belongs_to :address
 end
 
-CarrierWave.configure do |config|
-  config.fog_credentials = {
-    :provider               => 'AWS',
-    :aws_access_key_id      => 'AWS_ACCESS_KEY_ID',
-    :aws_secret_access_key  => 'AWS_SECRET_ACCESS_KEY'
-  }
-  config.fog_directory  = 'medicalidus'
-end
 
-class MyUploader < CarrierWave::Uploader::Base
-  include CarrierWave::RMagick
-  version :thumb do
-    process :resize_to_fill => [200,200]
-  end
 
-  storage :fog
-end
+#class MyUploader < CarrierWave::Uploader::Base
+#  include CarrierWave::RMagick
+#  version :thumb do
+#    process :resize_to_fill => [200,200]
+#  end
+#  storage :fog
+#end
 
-class Upload < Sequel::Model
-  mount_uploader :file, MyUploader
-end
 
 helpers do
   def title
@@ -86,21 +102,21 @@ helpers do
 end
 
 
-# get all the cards
-get "/" do
+#get all the cards
+get "/upload" do
+  #  @cards = Card.order("created_at DESC")
+  #  @title = "Welcome"
   @uploads = Upload.all
   erb :"cards/index"
-  # @cards = Card.order("created_at DESC")
-  # @title = "Welcome"
-  # erb :"cards/index"
+
 end
 
 post '/upload' do
-  upload = Upload.new
-  upload.file = params[:image]
-  upload.save
-  redirect to('/')
-  #upload(params[:content]['file'][:filename], params[:content]['file'][:tempfile])
+   upload = Upload.new
+   upload.filepath = params[:image]
+   upload.save
+  #  upload(params[:content]['file'][:filename], params[:content]['file'][:tempfile])
+   redirect to('/upload')
 end
 
 

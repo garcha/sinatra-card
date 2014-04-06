@@ -12,6 +12,8 @@ gem 'carrierwave'
 #gem 'aws-s3'
 gem 'rmagick'
 gem 'fog'
+gem 'carrierwave_direct'
+gem 'haml'
 
 group :development do
   gem 'sqlite3'
