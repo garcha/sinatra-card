@@ -10,7 +10,7 @@ gem 'sinatra-formhelpers-ng'
 gem 'stripe'
 gem 'carrierwave'
 #gem 'aws-s3'
-gem 'rmagick'
+gem 'rmagick', "2.12.2", :require => "RMagick"
 gem 'fog'
 gem 'carrierwave_direct'
 gem 'haml'
