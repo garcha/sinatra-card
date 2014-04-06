@@ -119,7 +119,7 @@ DEPENDENCIES
   fog
   haml
   pg
-  rmagick
+  rmagick (= 2.13.2)
   sinatra
   sinatra-activerecord
   sinatra-flash
