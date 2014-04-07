@@ -30,11 +30,15 @@ CarrierWave.configure do |config|
 end
 
 class MyUploader < CarrierWave::Uploader::Base
-  storage :fog
+  include CarrierWave::MiniMagick
 
   def extension_white_list
     %w(jpg jpeg gif png)
   end
+
+  process :resize_to_fit => [190, 140]
+
+  storage :fog
 end
 
 # class Upload < ActiveRecord::Base
@@ -69,12 +73,12 @@ end
 
 
 #get all the cards
-get "/" do
-  @cards = Card.order("created_at DESC")
-  @title = "Welcome"
-  erb :"cards/index"
-
-end
+# get "/" do
+#   @cards = Card.order("created_at DESC")
+#   @title = "Welcome"
+#   erb :"cards/index"
+#
+# end
 
 # post '/upload' do
 #    upload = Upload.new
@@ -86,10 +90,10 @@ end
 
 
 #create a card
-get "/cards/create" do
- @title = "Create card"
- @card = Card.new
- erb :"cards/create"
+get "/" do
+  @title = "Welcome, Create your Medical ID Card"
+  @card = Card.new
+  erb :"cards/create"
 end
 
 post "/cards" do
@@ -97,7 +101,7 @@ post "/cards" do
   # upload.filepath = params[:image]
   # upload.save
   @card = Card.new(params[:card])
-  @card.picture = params[:image]
+  @card.picture = params[:picture]
   if @card.save
     redirect "cards/#{@card.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
   else
@@ -141,29 +145,40 @@ post "/addresses" do
   end
 end
 
+get "/addresses/charge" do
+  erb :"addresses/charge"
+end
+
 get "/addresses/:id" do
-  @@address = Address.find(params[:id])
+  $address = Address.find(params[:id])
   @address = Address.find(params[:id])
   @title = @address.name
   erb :"addresses/view"
 end
 
-post '/addresses/charge' do
+error Stripe::CardError do
+  env['sinatra.error'].message
+end
+
+post "/charge" do
   # Amount in cents
   @amount = 500
 
-  customer = Stripe::Customer.create(
-    :email => @@address.email,
-    :card  => params[:stripeToken]
-  )
-
   charge = Stripe::Charge.create(
+    :email       => customer.email,
     :amount      => @amount,
     :description => 'MedicalIDOne Card',
     :currency    => 'usd',
-    :customer    => @@address.id
+    :customer    => @address.id,
+    :card        => params[:stripeToken]
   )
 
-  erb :'addresses/charge'
+  erb :"addresses/charge"
 
 end
+
+# charge = Stripe::Charge.create(
+# :amount => 1000,
+# :currency => "usd",
+# :card => params[:stripeToken] # replace full card details with the string token from our params
+# )
