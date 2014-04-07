@@ -37,13 +37,13 @@ class MyUploader < CarrierWave::Uploader::Base
   end
 end
 
-class Upload < ActiveRecord::Base
-  mount_uploader :filepath, MyUploader
-  belongs_to :card
-end
+# class Upload < ActiveRecord::Base
+#   mount_uploader :filepath, MyUploader
+#   belongs_to :card
+# end
 
 class Card < ActiveRecord::Base
-
+  mount_uploader :picture, MyUploader
   # validates :name, presence: true
   # validates :phone, presence: true
 
@@ -72,18 +72,17 @@ end
 get "/" do
   @cards = Card.order("created_at DESC")
   @title = "Welcome"
-  @upload = Upload.last
   erb :"cards/index"
 
 end
 
-post '/upload' do
-   upload = Upload.new
-   upload.filepath = params[:image]
-   upload.save
-  #  upload(params[:content]['file'][:filename], params[:content]['file'][:tempfile])
-   redirect to('/')
-end
+# post '/upload' do
+#    upload = Upload.new
+#    upload.filepath = params[:image]
+#    upload.save
+#   #  upload(params[:content]['file'][:filename], params[:content]['file'][:tempfile])
+#    redirect to('/')
+# end
 
 
 #create a card
@@ -92,13 +91,18 @@ get "/cards/create" do
  @card = Card.new
  erb :"cards/create"
 end
+
 post "/cards" do
- @card = Card.new(params[:card])
- if @card.save
-   redirect "cards/#{@card.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
- else
-   redirect "cards/create", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
- end
+  # upload = Upload.new
+  # upload.filepath = params[:image]
+  # upload.save
+  @card = Card.new(params[:card])
+  @card.picture = params[:image]
+  if @card.save
+    redirect "cards/#{@card.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
+  else
+    redirect "cards/create", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
+  end
 end
 
 #view post
@@ -121,12 +125,12 @@ put "/cards/:id" do
   redirect "/cards/#{@card.id}"
 end
 
-# #Address create
-# get "/address/create" do
-#   @title = "Shipping address"
-#   @address = Address.new
-#   erb :"addresses/create"
-# end
+#Address create
+get "/address/create" do
+  @title = "Shipping address"
+  @address = Address.new
+  erb :"addresses/create"
+end
 
 post "/addresses" do
   @address = Address.new(params[:address])

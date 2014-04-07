@@ -6,7 +6,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title><%= title %></title>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://s3.amazonaws.com/medicalidus/uploads/jasny-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://s3.amazonaws.com/medicalidus/uploads/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!--     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"> -->
     <style>
       body {
         padding-top: 75px;
@@ -58,11 +60,11 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.0/js/jasny-bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://s3.amazonaws.com/medicalidus/uploads/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://s3.amazonaws.com/medicalidus/uploads/jasny-bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://s3.amazonaws.com/medicalidus/uploads/bootstrap.min.js"></script>
     <script>
-    //** removes alerts after 4 seconds */
+    /** removes alerts after 4 seconds */
     window.setTimeout(function() {
         $(".alert").fadeTo(4500, 0).slideUp(500, function(){
             $(this).remove();
