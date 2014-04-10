@@ -1,6 +1,19 @@
 <h2>Make your payment</h2>
 
-<form action="/charge" method="POST" id="payment-form">
+
+
+<form action="chagre" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_8FE6oLIOl7cVFDNu29FYEGZ1"
+    data-amount="2000"
+    data-name="Demo Site"
+    data-description="2 widgets ($20.00)"
+    data-image="/128x128.png">
+  </script>
+</form>
+
+<!-- <form action="/charge" method="POST" id="payment-form">
   <span class="payment-errors"></span>
   <div class="form-row">
     <label>
@@ -76,7 +89,7 @@
 
 
   <button type="submit">Submit Payment</button>
-</form>
+</form> -->
 <!-- <form action="/addresses/charge" method="post" class="payment">
     <article>
       <label class="amount">
