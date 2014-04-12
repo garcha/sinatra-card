@@ -10,7 +10,7 @@ require 'fog'
 require 'carrierwave_direct'
 require 'haml'
 require 'carrierwave/orm/activerecord'
-#require 'aws/s3'
+require 'pony'
 
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
@@ -168,7 +168,57 @@ post "/addresses/charge" do
     :card        => params[:stripeToken]
   )
 
-   erb :"addresses/thankyou"
+   @card = Card.last
+   @address = Address.last
+
+
+   Pony.mail(
+     :from => 'Medical ID One',
+     :to => 'Jaspreet@garcha.com',
+     :subject => "New Medical ID Card Sold",
+     :headers => { 'Content-Type' => 'text/html' },
+     :body =>
+     "<p>Picture: <img src=#{@card.picture.url} /> #{@card.picture.url}</p>
+     <p>Name: #{@card.name} </p>
+     <p>Address: #{@card.address1} </p>
+     <p>Address: #{@card.address2} </p>
+     <p>Phone Number: #{@card.phone} </p>
+     <p>Date of Birth: #{@card.dob} </p>
+     <p>Emergency Contact: #{@card.em_contact} </p>
+     <p>Emergency Phone Number: #{@card.em_phone} </p>
+     <p>Doctor: #{@card.doctor} </p>
+     <p>Doctors Phone number: #{@card.doc_phone} </p>
+     <p>Insurance Provider: #{@card.insurance}</p>
+     <p>Insurance Information: #{@card.insur_numner} </p>
+     <p>Insurance Phone number: #{@card.insur_phone} </p>
+     <p>Medical History: #{@card.medical_history1} </p>
+     <p>Medical History: #{@card.medical_history2} </p>
+     <p>Medical History: #{@card.medical_history3} </p>
+     <p>Medical History: #{@card.medical_history4} </p>
+     <p>Medical History: #{@card.medical_history5} </p>
+     <p>Medication: #{@card.medication1} </p>
+     <p>Medication: #{@card.medication2} </p>
+     <p>Medication: #{@card.medication3} </p>
+     <p>Medication: #{@card.medication4} </p>
+     <p>Medication: #{@card.medication5} </p>
+     <p>Name: #{@address.name}</p>
+     <p>Address: #{@address.address}</p>
+     <p>Address: #{@address.address1}</p>
+     <p>Address: #{@address.address2}</p>
+     <p>Email Address: #{@address.email}</p>
+     <p>Phone Number: #{@address.phone}</p>",
+     :via => :smtp,
+     :via_options => {
+        :address          => 'smtp.sendgrid.net',
+        :port             => '587',
+        :enable_starttls_auto => true,
+        :user_name            => ENV['SENDGRID_USERNAME'],
+        :password             => ENV['SENDGRID_PASSWORD'],
+        :authentication       => :plain,
+        :domain               => ENV['SENDGRID_DOMAIN'] || 'localhost.localdomain'
+        })
+
+    redirect '/addresses/thankyou'
 
 end
 
