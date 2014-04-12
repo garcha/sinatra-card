@@ -190,7 +190,6 @@ post "/addresses/charge" do
      <p>Doctors Phone number: #{@card.phone_doc} </p>
      <p>Insurance Provider: #{@card.insurance}</p>
      <p>Insurance Information: #{@card.insur_numner} </p>
-     <p>Insurance Phone number: #{@card.insur_phone} </p>
      <p>Medical History: #{@card.medical_history1} </p>
      <p>Medical History: #{@card.medical_history2} </p>
      <p>Medical History: #{@card.medical_history3} </p>
@@ -206,7 +205,7 @@ post "/addresses/charge" do
      <p>Address: #{@address.address1}</p>
      <p>Address: #{@address.address2}</p>
      <p>Email Address: #{@address.email}</p>
-     <p>Phone Number: #{@address.phone}</p>",
+     <p>Phone Number: #{@address.phone1}</p>",
      :via => :smtp,
      :via_options => {
         :address          => 'smtp.sendgrid.net',
