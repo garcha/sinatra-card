@@ -182,12 +182,12 @@ post "/addresses/charge" do
      <p>Name: #{@card.name} </p>
      <p>Address: #{@card.address1} </p>
      <p>Address: #{@card.address2} </p>
-     <p>Phone Number: #{@card.phone} </p>
+     <p>Phone Number: #{@card.phone1} </p>
      <p>Date of Birth: #{@card.dob} </p>
      <p>Emergency Contact: #{@card.em_contact} </p>
-     <p>Emergency Phone Number: #{@card.em_phone} </p>
+     <p>Emergency Phone Number: #{@card.phone_em} </p>
      <p>Doctor: #{@card.doctor} </p>
-     <p>Doctors Phone number: #{@card.doc_phone} </p>
+     <p>Doctors Phone number: #{@card.phone_doc} </p>
      <p>Insurance Provider: #{@card.insurance}</p>
      <p>Insurance Information: #{@card.insur_numner} </p>
      <p>Insurance Phone number: #{@card.insur_phone} </p>
