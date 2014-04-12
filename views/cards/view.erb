@@ -1,22 +1,28 @@
 
 <div>
-<h2>Add your shipping address</h2>
+<h2>Confirm your shipping address</h2>
 <br/>
 
 <form class="form-inline" role="form" method='POST' action='/addresses'>
 
   <div class="form-group">
     <label class="control-label" for="name">Name:</label>
-    <input id="name" type='text' name='address[name]' class='form-control'>
+    <input id="name" type='text' name='address[name]' value="<%= @card.name %>">
   </div>
+  <br>
+  <div class="form-group">
+    <label class="control-label" for="email">Email:</label>
+    <input id="email" type='text' name='address[email]' >
+  </div>
+  <br>
   <div class="form-group">
     <label class="control-label" for="address">Address:</label>
-    <input id="address" type='text' name='address[address]'>
+    <input id="address" type='text' name='address[address]' value="<%= @card.address1 %>">
   </div>
   <br>
   <div class="form-group">
     <label class="control-label" for="address1">Address:</label>
-    <input id="address1" type='text' name='address[address1]'>
+    <input id="address1" type='text' name='address[address1]' value="<%= @card.address2 %>">
   </div>
   <br>
   <div class="form-group">
@@ -25,13 +31,8 @@
   </div>
   <br>
   <div class="form-group">
-    <label class="control-label" for="email">Email:</label>
-    <input id="email" type='text' name='address[email]'>
-  </div>
-  <br>
-  <div class="form-group">
     <label class="control-label" for="phone">Phone number:</label>
-    <input id="phone" type='integer' name='address[phone]'>
+    <input id="phone" type='integer' name='address[phone]' value="<%= @card.phone %>">
   </div>
   <br>
 <!--   <div class="form-group">
