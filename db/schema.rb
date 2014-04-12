@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404014005) do
+ActiveRecord::Schema.define(version: 20140412175028) do
 
   create_table "addresses", force: true do |t|
     t.integer  "card_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140404014005) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone1"
   end
 
   create_table "cards", force: true do |t|
@@ -53,6 +54,10 @@ ActiveRecord::Schema.define(version: 20140404014005) do
     t.datetime "updated_at"
     t.string   "picture"
     t.string   "avatar"
+    t.string   "phone1"
+    t.string   "phone_doc"
+    t.string   "phone_em"
+    t.string   "phone_insur"
   end
 
   create_table "purchases", force: true do |t|
