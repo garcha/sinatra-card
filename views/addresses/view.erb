@@ -1,6 +1,32 @@
 <h2>Make your payment</h2>
 
-<form action="/charge" method="POST" id="payment-form">
+
+<form action="/addresses/charge" method="post" class="payment">
+    <article>
+      <label class="amount">
+        <span>Amount: $5.00</span>
+
+        <div class="form-row">
+          <label>
+            <span>Email</span>
+            <input type="text" size="20" data-stripe="email" value="jazz@jazz.com"/>
+          </label>
+        </div>
+      </label>
+    </article>
+
+    <script src="https://checkout.stripe.com/v3/checkout.js" class="stripe-button" data-key="<%= settings.publishable_key %>"></script>
+</form>
+
+<p>Name: <%= @address.name %></p>
+<p>Address: <%= @address.address %></p>
+<p>Address: <%= @address.address1 %></p>
+<p>Address: <%= @address.address2 %></p>
+<p>Email Address: <%= @address.email %></p>
+<p>Phone Number: <%= @address.phone %></p>
+
+
+<!-- <form action="/charge" method="POST" id="payment-form">
   <span class="payment-errors"></span>
   <div class="form-row">
     <label>
@@ -8,6 +34,8 @@
       <input type="text" size="20" data-stripe="name"/>
     </label>
   </div>
+
+
 
   <div class="form-row">
     <label>
@@ -18,14 +46,14 @@
 
   <div class="form-row">
     <label>
-      <span>address_line1</span>
+      <span>Address</span>
       <input type="text" size="20" data-stripe="emaddress_line1"/>
     </label>
   </div>
 
   <div class="form-row">
     <label>
-      <span>address_line2</span>
+      <span>Address</span>
       <input type="text" size="20" data-stripe="address_line2"/>
     </label>
   </div>
@@ -76,21 +104,4 @@
 
 
   <button type="submit">Submit Payment</button>
-</form>
-<!-- <form action="/addresses/charge" method="post" class="payment">
-    <article>
-      <label class="amount">
-        <span>Amount: $5.00</span>
-        <input data-stripe="email" value="<%= @address.email%>"/>
-      </label>
-    </article>
-
-    <script src="https://checkout.stripe.com/v3/checkout.js" class="stripe-button" data-key="<%= settings.publishable_key %>"></script>
-</form> -->
-
-<p>Name: <%= @address.name %></p>
-<p>Address: <%= @address.address %></p>
-<p>Address: <%= @address.address1 %></p>
-<p>Address: <%= @address.address2 %></p>
-<p>Email Address: <%= @address.email %></p>
-<p>Phone Number: <%= @address.phone %></p>
+</form> --> -->
