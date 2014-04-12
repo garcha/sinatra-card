@@ -53,6 +53,9 @@ GEM
       tilt
     i18n (0.6.9)
     json (1.8.1)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
     mime-types (1.25.1)
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
@@ -65,6 +68,9 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     pg (0.17.1)
+    polyglot (0.3.4)
+    pony (1.8)
+      mail (>= 2.0)
     rack (1.5.2)
     rack-protection (1.5.2)
       rack
@@ -103,6 +109,9 @@ GEM
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
     tux (0.3.0)
       ripl (>= 0.3.5)
       ripl-multi_line (>= 0.2.4)
@@ -122,6 +131,7 @@ DEPENDENCIES
   haml
   mini_magick
   pg
+  pony
   sinatra
   sinatra-activerecord
   sinatra-flash
