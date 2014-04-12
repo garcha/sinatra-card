@@ -14,6 +14,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'carrierwave_direct'
 gem 'haml'
+gem 'pony'
 
 group :development do
   gem 'sqlite3'
