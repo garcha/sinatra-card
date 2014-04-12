@@ -145,40 +145,35 @@ post "/addresses" do
   end
 end
 
-get "/addresses/charge" do
-  erb :"addresses/charge"
+get "/addresses/thankyou" do
+  erb :"addresses/thankyou"
 end
 
 get "/addresses/:id" do
-  $address = Address.find(params[:id])
   @address = Address.find(params[:id])
   @title = @address.name
   erb :"addresses/view"
 end
 
-error Stripe::CardError do
-  env['sinatra.error'].message
-end
 
-post "/charge" do
+post "/addresses/charge" do
   # Amount in cents
   @amount = 500
 
-  charge = Stripe::Charge.create(
-    :email       => customer.email,
+   charge = Stripe::Charge.create(
+    :email       => params[:email],
     :amount      => @amount,
     :description => 'MedicalIDOne Card',
     :currency    => 'usd',
-    :customer    => @address.id,
     :card        => params[:stripeToken]
   )
 
-  erb :"addresses/charge"
+   erb :"addresses/thankyou"
 
 end
 
-# charge = Stripe::Charge.create(
-# :amount => 1000,
-# :currency => "usd",
-# :card => params[:stripeToken] # replace full card details with the string token from our params
-# )
+
+
+error Stripe::CardError do
+  env['sinatra.error'].message
+end
