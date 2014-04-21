@@ -43,15 +43,16 @@
     </div>
 
     <div class="container body">
-      <p class="lead">
-        <% if flash[:notice] %>
-          <p class="alert alert-success"><%= flash[:notice] %></p>
-        <% end %>
-        <% if flash[:error] %>
-          <p class="alert alert-error"><%= flash[:error] %></p>
-        <% end %>
-      </p>
-      <%= yield %>
+      <div class="col-md-7 left clearfix">
+        <p class="lead">
+          <% if flash[:notice] %>
+            <p class="alert alert-success"><%= flash[:notice] %></p>
+          <% end %>
+          <% if flash[:error] %>
+            <p class="alert alert-error"><%= flash[:error] %></p>
+          <% end %>
+        </p>
+        <%= yield %>
     </div>
 
 
@@ -68,7 +69,7 @@
     <script src="https://s3.amazonaws.com/medicalidus/uploads/jquery-1.11.0.min.js"></script>
     <script src="https://s3.amazonaws.com/medicalidus/uploads/bootstrap.min.js"></script>
     <script src="https://s3.amazonaws.com/medicalidus/uploads/jasny-bootstrap.min.js"></script>
-    
+
     <script>
     /** removes alerts after 4 seconds */
     window.setTimeout(function() {

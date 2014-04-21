@@ -45,14 +45,16 @@ class MyUploader < CarrierWave::Uploader::Base
 end
 
 class Card < ActiveRecord::Base
-  mount_uploader :picture, MyUploader
-  # validates :name, presence: true
-  # validates :phone, presence: true
 
+  validates :name, :phone1, :picture, :address1, :city, :state, :zip, :em_contact, :phone_em, presence: true
+
+  mount_uploader :picture, MyUploader
 end
 
 class Address < ActiveRecord::Base
   belongs_to :card
+
+  validates :name, :email, :address, :city, :state, :zip, :phone1, presence: true
 end
 
 class Purchase < ActiveRecord::Base
@@ -84,7 +86,7 @@ post "/cards" do
   if @card.save
     redirect "cards/#{@card.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
   else
-    redirect "cards/create", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
+    redirect "/", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
   end
 end
 
