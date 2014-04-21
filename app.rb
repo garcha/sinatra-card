@@ -44,11 +44,6 @@ class MyUploader < CarrierWave::Uploader::Base
   storage :fog
 end
 
-# class Upload < ActiveRecord::Base
-#   mount_uploader :filepath, MyUploader
-#   belongs_to :card
-# end
-
 class Card < ActiveRecord::Base
   mount_uploader :picture, MyUploader
   # validates :name, presence: true
@@ -75,23 +70,6 @@ helpers do
 end
 
 
-#get all the cards
-# get "/" do
-#   @cards = Card.order("created_at DESC")
-#   @title = "Welcome"
-#   erb :"cards/index"
-#
-# end
-
-# post '/upload' do
-#    upload = Upload.new
-#    upload.filepath = params[:image]
-#    upload.save
-#   #  upload(params[:content]['file'][:filename], params[:content]['file'][:tempfile])
-#    redirect to('/')
-# end
-
-
 #create a card
 get "/" do
   @title = "Welcome, Create your Medical ID Card"
@@ -100,9 +78,7 @@ get "/" do
 end
 
 post "/cards" do
-  # upload = Upload.new
-  # upload.filepath = params[:image]
-  # upload.save
+
   @card = Card.new(params[:card])
   @card.picture = params[:picture]
   if @card.save
@@ -142,7 +118,7 @@ end
 post "/addresses" do
   @address = Address.new(params[:address])
   if @address.save
-    redirect "addresses/#{@address.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
+    redirect "addresses/#{@address.id}", :notice => 'Congrats! You Just created your card. (This message will disapear in 4 seconds.)'
   else
     erb :"addresses/create", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
   end
@@ -223,8 +199,6 @@ post "/addresses/charge" do
     redirect '/addresses/thankyou'
 
 end
-
-
 
 error Stripe::CardError do
   env['sinatra.error'].message
