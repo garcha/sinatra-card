@@ -1,165 +1,178 @@
-<h2 class="featurette-heading">Create Your Medical Id Card</h2>
+<div class="col-md-7 left clearfix">
+  <h2 class="featurette-heading">Create Your Medical Id Card</h2>
+    <form class="form-horizontal" action="/cards" method="POST"  role="form" enctype="multipart/form-data">
 
-<p>
-<form class="form-horizontal" action="/cards" method="POST"  role="form" enctype="multipart/form-data">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="picture" >Picture:</label>
+        <div class="col-sm-4">
+          <input id="picture" type='file' name='card[picture]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="picture" >Picture:</label>
-    <div class="col-sm-4">
-      <input id="picture" type='file' name='card[picture]'>
-    </div>
-  </div>
+      <div class="form-group">
+         <label class="col-sm-2 control-label" for="name">Name:</label>
+         <div class="col-sm-5">
+           <input id="name" type='text' class="form-control" name='card[name]'>
+         </div>
+      </div>
 
-  <div class="form-group">
-     <label class="col-sm-2 control-label" for="name">Name:</label>
-     <div class="col-sm-5">
-       <input id="name" type='text' class="form-control" name='card[name]'>
-     </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="card_phone">Phone Number:</label>
+        <div class="col-sm-5">
+          <input id="phone" type='tel' class="form-control" name='card[phone1]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="card_phone">Phone Number:</label>
-    <div class="col-sm-5">
-      <input id="phone" type='tel' class="form-control" name='card[phone1]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="address1">Address:</label>
+        <div class="col-sm-5">
+          <input id="address1" type='text' class="form-control" name='card[address1]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="address1">Address:</label>
-    <div class="col-sm-5">
-      <input id="address1" type='text' class="form-control" name='card[address1]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="address2">Address:</label>
+        <div class="col-sm-5">
+          <input id="address2" type='text' class="form-control" name='card[address2]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="address2">Address:</label>
-    <div class="col-sm-5">
-      <input id="address2" type='text' class="form-control" name='card[address2]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="dob">Date of Birth:</label>
+        <div class="col-sm-5">
+          <input id="dob" type='date' class="form-control" name='card[dob]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="dob">Date of Birth:</label>
-    <div class="col-sm-5">
-      <input id="dob" type='date' class="form-control" name='card[dob]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="em_contact">Emergency Contact:</label>
+        <div class="col-sm-5">
+          <input id="em_contact" type='text' class="form-control" name='card[em_contact]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="em_contact">Emergency Contact:</label>
-    <div class="col-sm-5">
-      <input id="em_contact" type='text' class="form-control" name='card[em_contact]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="em_phone">Emergency Phone number:</label>
+        <div class="col-sm-5">
+          <input id="em_phone" type='tel' class="form-control" name='card[phone_em]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="em_phone">Emergency Phone number:</label>
-    <div class="col-sm-5">
-      <input id="em_phone" type='tel' class="form-control" name='card[phone_em]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="doctor">Doctor:</label>
+        <div class="col-sm-5">
+          <input id="doctor" type='text' class="form-control" name='card[doctor]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="doctor">Doctor:</label>
-    <div class="col-sm-5">
-      <input id="doctor" type='text' class="form-control" name='card[doctor]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="doc_phone">Doctor's phone number:</label>
+        <div class="col-sm-5">
+          <input id="doc_phone" type='tel' class="form-control" name='card[phone_doc]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="doc_phone">Doctor's phone number:</label>
-    <div class="col-sm-5">
-      <input id="doc_phone" type='tel' class="form-control" name='card[phone_doc]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="insurance">Insurance provider:</label>
+        <div class="col-sm-5">
+          <input id="insurance" type='text' class="form-control" name='card[insurance]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="insurance">Insurance provider:</label>
-    <div class="col-sm-5">
-      <input id="insurance" type='text' class="form-control" name='card[insurance]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="insur_numner">Insurance id number:</label>
+        <div class="col-sm-5">
+          <input id="insur_numner" type='text' class="form-control" name='card[insur_numner]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="insur_numner">Insurance id number:</label>
-    <div class="col-sm-5">
-      <input id="insur_numner" type='text' class="form-control" name='card[insur_numner]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medical_history1">Medical condition:</label>
+        <div class="col-sm-5">
+          <input id="medical_history1" type='text' class="form-control" name='card[medical_history1]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medical_history1">Medical condition:</label>
-    <div class="col-sm-5">
-      <input id="medical_history1" type='text' class="form-control" name='card[medical_history1]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medical_history2">Medical condition:</label>
+        <div class="col-sm-5">
+          <input id="medical_history2" type='text' class="form-control" name='card[medical_history2]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medical_history2">Medical condition:</label>
-    <div class="col-sm-5">
-      <input id="medical_history2" type='text' class="form-control" name='card[medical_history2]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medical_history3">Medical condition:</label>
+        <div class="col-sm-5">
+          <input id="medical_history3" type='text' class="form-control" name='card[medical_history3]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medical_history3">Medical condition:</label>
-    <div class="col-sm-5">
-      <input id="medical_history3" type='text' class="form-control" name='card[medical_history3]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medical_history4">Medical condition:</label>
+        <div class="col-sm-5">
+          <input id="medical_history4" type='text' class="form-control" name='card[medical_history4]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medical_history4">Medical condition:</label>
-    <div class="col-sm-5">
-      <input id="medical_history4" type='text' class="form-control" name='card[medical_history4]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medical_history5">Medical condition:</label>
+        <div class="col-sm-5">
+          <input id="medical_history5" type='text' class="form-control" name='card[medical_history5]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medical_history5">Medical condition:</label>
-    <div class="col-sm-5">
-      <input id="medical_history5" type='text' class="form-control" name='card[medical_history5]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medication1">Medication:</label>
+        <div class="col-sm-5">
+          <input id="medication1" type='text' class="form-control" name='card[medication1]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medication1">Medication:</label>
-    <div class="col-sm-5">
-      <input id="medication1" type='text' class="form-control" name='card[medication1]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medication2">Medication:</label>
+        <div class="col-sm-5">
+          <input id="medication2" type='text' class="form-control" name='card[medication2]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medication2">Medication:</label>
-    <div class="col-sm-5">
-      <input id="medication2" type='text' class="form-control" name='card[medication2]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medication3">Medication:</label>
+        <div class="col-sm-5">
+          <input id="medication3" type='text' class="form-control" name='card[medication3]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medication3">Medication:</label>
-    <div class="col-sm-5">
-      <input id="medication3" type='text' class="form-control" name='card[medication3]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medication4">Medication:</label>
+        <div class="col-sm-5">
+          <input id="medication4" type='text' class="form-control" name='card[medication4]'>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medication4">Medication:</label>
-    <div class="col-sm-5">
-      <input id="medication4" type='text' class="form-control" name='card[medication4]'>
-    </div>
-  </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="medication5">Medication:</label>
+        <div class="col-sm-5">
+          <input id="medication5" type='text' class="form-control" name='card[medication5]'>
+        </div>
+      </div>
+    <!--    <div class="form-group">
+        <label class="control-label" for="pvc">PVC:</label>
+        <input id="pvc" type='boolean' name='card[pvc]'>
+      </div> -->
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    <br>
+</div>
 
-  <div class="form-group">
-    <label class="col-sm-2 control-label" for="medication5">Medication:</label>
-    <div class="col-sm-5">
-      <input id="medication5" type='text' class="form-control" name='card[medication5]'>
-    </div>
-  </div>
-<!--    <div class="form-group">
-    <label class="control-label" for="pvc">PVC:</label>
-    <input id="pvc" type='boolean' name='card[pvc]'>
-  </div> -->
-  <button type="submit" class="btn btn-success">Submit</button>
-</form>
-</p>
+<div class="col-md-5">
+  <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+  <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+  <hr class="featurette-divider">
+  <img class="img-circle" src="assets/circle.svg" alt="Generic placeholder image">
+  <h2>Heading</h2>
+  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+  <hr class="featurette-divider">
+  <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+  <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+</div>
