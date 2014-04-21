@@ -24,16 +24,23 @@
     </div>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label" for="address1">Address:</label>
+      <label class="col-sm-2 control-label" for="city">City:</label>
       <div class="col-sm-4">
-        <input id="address1" type='text' class="form-control" name='address[address1]' value="<%= @card.address2 %>">
+        <input id="address1" type='text' class="form-control" name='address[city]' value="<%= @card.city %>">
       </div>
     </div>
 
     <div class="form-group">
-      <label class="col-sm-2 control-label" for="address2">Address:</label>
+      <label class="col-sm-2 control-label" for="state">State:</label>
       <div class="col-sm-4">
-        <input id="address2" type='text' class="form-control" name='address[address2]'>
+        <input id="address1" type='text' class="form-control" name='address[state]' value="<%= @card.state %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="zip">Zip:</label>
+      <div class="col-sm-4">
+        <input id="address1" type='text' class="form-control" name='address[zip]' value="<%= @card.zip %>">
       </div>
     </div>
 
@@ -58,8 +65,12 @@
     <dd><%= @card.name %></dd>
     <dt>Address:</dt>
     <dd><%= @card.address1 %></dd>
-    <dt>Address:</dt>
-    <dd><%= @card.address2 %></dd>
+    <dt>City:</dt>
+    <dd><%= @card.city %></dd>
+    <dt>State:</dt>
+    <dd><%= @card.state %></dd>
+    <dt>Zip:</dt>
+    <dd><%= @card.zip %></dd>
     <dt>DOB:</dt>
     <dd><%= @card.dob %></dd>
     <dt>Phone Number:</dt>

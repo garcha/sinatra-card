@@ -13,7 +13,7 @@ require 'carrierwave/orm/activerecord'
 require 'pony'
 
 
-set :public, File.dirname( __FILE__ ) + '/public'
+# set :public, File.dirname( __FILE__ ) + '/public'
 
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
