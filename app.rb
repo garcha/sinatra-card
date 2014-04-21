@@ -46,7 +46,7 @@ end
 
 class Card < ActiveRecord::Base
 
-  validates :name, :phone1, :picture, :address1, :city, :state, :zip, :em_contact, :phone_em, presence: true
+  #validates :name, :phone1, :picture, :address1, :city, :state, :zip, :em_contact, :phone_em, presence: true
 
   mount_uploader :picture, MyUploader
 end
@@ -54,7 +54,7 @@ end
 class Address < ActiveRecord::Base
   belongs_to :card
 
-  validates :name, :email, :address, :city, :state, :zip, :phone1, presence: true
+  #validates :name, :email, :address, :city, :state, :zip, :phone1, presence: true
 end
 
 class Purchase < ActiveRecord::Base
