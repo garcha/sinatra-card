@@ -3,11 +3,14 @@
 <h2>Confirm your shipping address</h2>
 <br/>
 
-<form class="form-inline" role="form" method='POST' action='/addresses'>
+
+<form class="form-horizontal" role="form" method='POST' action='/addresses'>
 
   <div class="form-group">
-    <label class="control-label" for="name">Name:</label>
-    <input id="name" type='text' name='address[name]' value="<%= @card.name %>">
+    <label class="col-sm-2 control-label" for="name">Name:</label>
+    <div class="col-sm-4">
+    <input id="name" type='text' name='address[name]' value="<%= @card.name %>"
+    </div>
   </div>
   <br>
   <div class="form-group">
@@ -50,6 +53,14 @@
 
   <h2>Your Medical ID card info</h2>
 
+<dl class="dl-horizontal">
+  <dt>Picture:</dt>
+  <dd><img src=<%= @card.picture.url %> /></dd>
+  <dt>Name:</dt>
+  <dd><%= @card.name %></dd>
+  <dt>Address:</dt>
+  <dd><%= @card.address1 %></dd>
+</dl>
 
 <p>Picture: <img src=<%= @card.picture.url %> /></p>
 <p>Name: <%= @card.name %></p>
