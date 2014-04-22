@@ -2,11 +2,19 @@
   <form class="form-horizontal" action="/cards/<%= @card.id %>" method="POST"  role="form" enctype="multipart/form-data">
   <input type="hidden" name="_method" value="put" >
 
+
     <div class="form-group">
       <label class="col-sm-2 control-label" for="picture" >Picture:</label>
-      <div class="col-sm-4">
-        <input id="picture" type='file' name='card[picture]' value="<img src=<%= @card.picture.url %>">
-      </div>
+        <div class="col-sm-4 fileinput fileinput-new" data-provides="fileinput">
+          <div class="fileinput-new thumbnail">
+            <img src="<%= @card.picture.url %>" alt="">
+          </div>
+          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+          <div>
+            <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input id="picture" type="file" name="card[picture]"></span>
+            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+          </div>
+        </div>
     </div>
 
     <div class="form-group">
@@ -181,7 +189,7 @@
         <label class="control-label" for="pvc">PVC:</label>
         <input id="pvc" type='boolean' name='card[pvc]'>
       </div> -->
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success btn-lg btn-block five">Submit</button>
     </form>
   <br>
 </div>
