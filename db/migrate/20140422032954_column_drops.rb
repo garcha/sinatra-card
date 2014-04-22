@@ -11,7 +11,6 @@ class ColumnDrops < ActiveRecord::Migration
     remove_column :cards, :doc_phone
     remove_column :cards, :insur_phone
     remove_column :cards, :avatar
-    remove_column :cards, :address2
     remove_column :addresses, :address1
     remove_column :addresses, :address2
     remove_column :addresses, :phone
