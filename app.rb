@@ -44,9 +44,12 @@ class MyUploader < CarrierWave::Uploader::Base
   storage :fog
 end
 
+message = Hash.new
+
 class Card < ActiveRecord::Base
 
-  #validates :name, :phone1, :picture, :address1, :city, :state, :zip, :em_contact, :phone_em, presence: true
+  validates_presence_of :name, :message => "%{value} cannot be Empty."
+  #:phone1, :picture, :address1, :city, :state, :zip, :em_contact, :phone_em,
 
   mount_uploader :picture, MyUploader
 end
@@ -54,7 +57,7 @@ end
 class Address < ActiveRecord::Base
   belongs_to :card
 
-  #validates :name, :email, :address, :city, :state, :zip, :phone1, presence: true
+  validates_presence_of :name, :email, :address, :city, :state, :zip, :phone1
 end
 
 class Purchase < ActiveRecord::Base
@@ -86,7 +89,9 @@ post "/cards" do
   if @card.save
     redirect "cards/#{@card.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
   else
-    redirect "/", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
+    message.each do |attr,msg|
+    redirect "/", :error =>  msg
+    end
   end
 end
 
@@ -162,7 +167,9 @@ post "/addresses/charge" do
      "<p>Picture: <img src=#{@card.picture.url} /> #{@card.picture.url}</p>
      <p>Name: #{@card.name} </p>
      <p>Address: #{@card.address1} </p>
-     <p>Address: #{@card.address2} </p>
+     <p>City: #{@card.city} </p>
+     <p>State: #{@card.state} </p>
+     <p>Zip: #{@card.zip} </p>
      <p>Phone Number: #{@card.phone1} </p>
      <p>Date of Birth: #{@card.dob} </p>
      <p>Emergency Contact: #{@card.em_contact} </p>
