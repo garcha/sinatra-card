@@ -13,7 +13,7 @@ require 'carrierwave/orm/activerecord'
 require 'pony'
 
 
-set :public, File.dirname( __FILE__ ) + '/public'
+set :public_dir, File.dirname( __FILE__ ) + '/public'
 
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
@@ -190,8 +190,9 @@ post "/addresses/charge" do
      <p>Medication: #{@card.medication5} </p>
      <p>Name: #{@address.name}</p>
      <p>Address: #{@address.address}</p>
-     <p>Address: #{@address.address1}</p>
-     <p>Address: #{@address.address2}</p>
+     <p>City: #{@address.city}</p>
+     <p>State: #{@address.state}</p>
+     <p>Zip: #{@address.zip}</p>
      <p>Email Address: #{@address.email}</p>
      <p>Phone Number: #{@address.phone1}</p>",
      :via => :smtp,
