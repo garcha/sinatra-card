@@ -13,7 +13,7 @@ require 'carrierwave/orm/activerecord'
 require 'pony'
 
 
-set :public_dir, File.dirname( __FILE__ ) + '/public'
+set :public, File.dirname( __FILE__ ) + '/public'
 
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
@@ -48,7 +48,7 @@ message = Hash.new
 
 class Card < ActiveRecord::Base
 
-  validates_presence_of :name, :message => "%{value} cannot be Empty."
+  #validates_presence_of :name, :message => "%{value} cannot be Empty."
   #:phone1, :picture, :address1, :city, :state, :zip, :em_contact, :phone_em,
 
   mount_uploader :picture, MyUploader
@@ -57,7 +57,7 @@ end
 class Address < ActiveRecord::Base
   belongs_to :card
 
-  validates_presence_of :name, :email, :address, :city, :state, :zip, :phone1
+  #validates_presence_of :name, :email, :address, :city, :state, :zip, :phone1
 end
 
 class Purchase < ActiveRecord::Base
@@ -178,6 +178,7 @@ post "/addresses/charge" do
      <p>Doctors Phone number: #{@card.phone_doc} </p>
      <p>Insurance Provider: #{@card.insurance}</p>
      <p>Insurance Information: #{@card.insur_numner} </p>
+     <p>Blood Type: #{@card.bloodtype} </p>
      <p>Medical History: #{@card.medical_history1} </p>
      <p>Medical History: #{@card.medical_history2} </p>
      <p>Medical History: #{@card.medical_history3} </p>
