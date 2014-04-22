@@ -1,78 +1,124 @@
 
-<div>
-<h2>Add your shipping address</h2>
-<br/>
+  <h2 class="featurette-heading">Confirm your shipping address</h2>
+  <form class="form-horizontal" role="form" method='POST' action='/addresses'>
 
-<form class="form-inline" role="form" method='POST' action='/addresses'>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="name">Name:</label>
+      <div class="col-sm-4">
+        <input id="name" type='text' class="form-control" name='address[name]' value="<%= @card.name %>">
+      </div>
+    </div>
 
-  <div class="form-group">
-    <label class="control-label" for="name">Name:</label>
-    <input id="name" type='text' name='address[name]' class='form-control'>
-  </div>
-  <div class="form-group">
-    <label class="control-label" for="address">Address:</label>
-    <input id="address" type='text' name='address[address]'>
-  </div>
-  <br>
-  <div class="form-group">
-    <label class="control-label" for="address1">Address:</label>
-    <input id="address1" type='text' name='address[address1]'>
-  </div>
-  <br>
-  <div class="form-group">
-    <label class="control-label" for="address2">Address:</label>
-    <input id="address2" type='text' name='address[address2]'>
-  </div>
-  <br>
-  <div class="form-group">
-    <label class="control-label" for="email">Email:</label>
-    <input id="email" type='text' name='address[email]'>
-  </div>
-  <br>
-  <div class="form-group">
-    <label class="control-label" for="phone">Phone number:</label>
-    <input id="phone" type='integer' name='address[phone]'>
-  </div>
-  <br>
-<!--   <div class="form-group">
-    <label class="control-label" for="pvc">Address1:</label>
-    <input id="pvc" type='boolean' name='card[pvc]'>
-  </div>
-  <br> -->
-  <input type="hidden" name='address[card_id]' value="<%= @card.id%>">
-  <button type="submit" class="btn btn-success">Submit</button>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="email">Email:</label>
+      <div class="col-sm-4">
+        <input id="email" type='email' class="form-control" name='address[email]' >
+      </div>
+    </div>
 
-</form>
-</div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="address">Address:</label>
+      <div class="col-sm-4">
+        <input id="address" type='text' class="form-control" name='address[address]' value="<%= @card.address1 %>">
+      </div>
+    </div>
 
-<div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="city">City:</label>
+      <div class="col-sm-4">
+        <input id="address1" type='text' class="form-control" name='address[city]' value="<%= @card.city %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="state">State:</label>
+      <div class="col-sm-4">
+        <input id="address1" type='text' class="form-control" name='address[state]' value="<%= @card.state %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="zip">Zip:</label>
+      <div class="col-sm-4">
+        <input id="address1" type='text' class="form-control" name='address[zip]' value="<%= @card.zip %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="phone">Phone number:</label>
+      <div class="col-sm-4">
+        <input id="phone" type='tel' class="form-control" name='address[phone1]' value="<%= @card.phone1 %>">
+      </div>
+    </div>
+    <input type="hidden" name='address[card_id]' value="<%= @card.id%>">
+    <button type="submit" class="btn btn-success">Submit</button>
+
+  </form>
 
   <h2>Your Medical ID card info</h2>
+  <a href="/cards/<%= @card.id %>/edit">Edit Card</a>
 
+  <dl class="dl-horizontal">
+    <dt>Picture:</dt>
+    <dd><img src=<%= @card.picture.url %> /></dd>
+    <dt>Name:</dt>
+    <dd><%= @card.name %></dd>
+    <dt>Address:</dt>
+    <dd><%= @card.address1 %></dd>
+    <dt>City:</dt>
+    <dd><%= @card.city %></dd>
+    <dt>State:</dt>
+    <dd><%= @card.state %></dd>
+    <dt>Zip:</dt>
+    <dd><%= @card.zip %></dd>
+    <dt>DOB:</dt>
+    <dd><%= @card.dob %></dd>
+    <dt>Phone Number:</dt>
+    <dd><%= @card.phone1 %></dd>
+    <dt>Emergency Contact:</dt>
+    <dd><%= @card.em_contact %></dd>
+    <dt>Emergency Phone #:</dt>
+    <dd><%= @card.phone_em %></dd>
+    <dt>Doctor:</dt>
+    <dd><%= @card.doctor %></dd>
+    <dt>Doctor's Phone #:</dt>
+    <dd><%= @card.phone_doc %></dd>
+    <dt>Insurance Provider:</dt>
+    <dd><%= @card.insurance %></dd>
+    <dt>Insurance Information:</dt>
+    <dd><%= @card.insur_numner %></dd>
+    <dt>Medical History:</dt>
+    <dd><%= @card.medical_history1 %></dd>
+    <dt>Medical History:</dt>
+    <dd><%= @card.medical_history2 %></dd>
+    <dt>Medical History:</dt>
+    <dd><%= @card.medical_history3 %></dd>
+    <dt>Medical History:</dt>
+    <dd><%= @card.medical_history4 %></dd>
+    <dt>Medical History:</dt>
+    <dd><%= @card.medical_history5 %></dd>
+    <dt>Medication:</dt>
+    <dd><%= @card.medication1 %></dd>
+    <dt>Medication:</dt>
+    <dd><%= @card.medication2 %></dd>
+    <dt>Medication:</dt>
+    <dd><%= @card.medication3 %></dd>
+    <dt>Medication:</dt>
+    <dd><%= @card.medication4 %></dd>
+    <dt>Medication:</dt>
+    <dd><%= @card.medication5 %></dd>
+  </dl>
+  <br>
+  <br>
 
-<p>Picture: <img src=<%= @card.picture.url %> /></p>
-<p>Name: <%= @card.name %></p>
-<p>Address: <%= @card.address1 %></p>
-<p>Address: <%= @card.address2 %></p>
-<p>Phone Number: <%= @card.phone %></p>
-<p>Date of Birth: <%= @card.dob %></p>
-<p>Emergency Contact: <%= @card.em_contact %></p>
-<p>Emergency Phone Number:<%= @card.em_phone %></p>
-<p>Doctor<%= @card.doctor %></p>
-<p>Doctor's Phone number: <%= @card.doc_phone %></p>
-<p>Insurance Provider: <%= @card.insurance %></p>
-<p>Insurance Information: <%= @card.insur_numner %></p>
-<p>Insurance Phone number: <%= @card.insur_phone %></p>
-<p>Medical History: <%= @card.medical_history1 %></p>
-<p>Medical History: <%= @card.medical_history2 %></p>
-<p>Medical History: <%= @card.medical_history3 %></p>
-<p>Medical History: <%= @card.medical_history4 %></p>
-<p>Medical History: <%= @card.medical_history5 %></p>
-<p>Medication: <%= @card.medication1 %></p>
-<p>Medication: <%= @card.medication2 %></p>
-<p>Medication: <%= @card.medication3 %></p>
-<p>Medication: <%= @card.medication4 %></p>
-<p>Medication: <%= @card.medication5 %></p>
-<a href="/cards/<%= @card.id %>/edit">Edit Card</a>
+</div>
 
+<div class="col-md-5">
+  <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+  <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+  <hr class="featurette-divider">
+  <img class="img-circle" src="/assets/circle.svg" alt="Generic placeholder image">
+  <h2>Heading</h2>
+  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+  <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
 </div>

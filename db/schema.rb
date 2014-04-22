@@ -10,34 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140404014005) do
+ActiveRecord::Schema.define(version: 20140422032954) do
 
   create_table "addresses", force: true do |t|
     t.integer  "card_id"
     t.string   "name"
     t.string   "address"
-    t.string   "address1"
-    t.string   "address2"
-    t.integer  "phone"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone1"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
   end
 
   create_table "cards", force: true do |t|
     t.string   "name"
     t.string   "address1"
-    t.string   "address2"
-    t.string   "address3"
     t.string   "dob"
-    t.integer  "phone"
     t.string   "em_contact"
-    t.integer  "em_phone"
     t.string   "doctor"
-    t.integer  "doc_phone"
     t.string   "insurance"
     t.string   "insur_numner"
-    t.integer  "insur_phone"
     t.string   "medical_history1"
     t.string   "medical_history2"
     t.string   "medical_history3"
@@ -52,22 +47,14 @@ ActiveRecord::Schema.define(version: 20140404014005) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture"
-    t.string   "avatar"
-  end
-
-  create_table "purchases", force: true do |t|
-    t.integer  "address_id"
-    t.string   "stripeEmail"
-    t.string   "stripeToken"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "uploads", force: true do |t|
-    t.string   "filepath"
-    t.integer  "card_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "phone1"
+    t.string   "phone_doc"
+    t.string   "phone_em"
+    t.string   "phone_insur"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "bloodtype"
   end
 
 end

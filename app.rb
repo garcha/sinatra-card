@@ -12,6 +12,9 @@ require 'haml'
 require 'carrierwave/orm/activerecord'
 require 'pony'
 
+
+set :public_dir, File.dirname( __FILE__ ) + '/public'
+
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
 
@@ -41,20 +44,20 @@ class MyUploader < CarrierWave::Uploader::Base
   storage :fog
 end
 
-# class Upload < ActiveRecord::Base
-#   mount_uploader :filepath, MyUploader
-#   belongs_to :card
-# end
+message = Hash.new
 
 class Card < ActiveRecord::Base
-  mount_uploader :picture, MyUploader
-  # validates :name, presence: true
-  # validates :phone, presence: true
 
+  validates_presence_of :name, :message => "%{value} cannot be Empty."
+  #:phone1, :picture, :address1, :city, :state, :zip, :em_contact, :phone_em,
+
+  mount_uploader :picture, MyUploader
 end
 
 class Address < ActiveRecord::Base
   belongs_to :card
+
+  validates_presence_of :name, :email, :address, :city, :state, :zip, :phone1
 end
 
 class Purchase < ActiveRecord::Base
@@ -72,23 +75,6 @@ helpers do
 end
 
 
-#get all the cards
-# get "/" do
-#   @cards = Card.order("created_at DESC")
-#   @title = "Welcome"
-#   erb :"cards/index"
-#
-# end
-
-# post '/upload' do
-#    upload = Upload.new
-#    upload.filepath = params[:image]
-#    upload.save
-#   #  upload(params[:content]['file'][:filename], params[:content]['file'][:tempfile])
-#    redirect to('/')
-# end
-
-
 #create a card
 get "/" do
   @title = "Welcome, Create your Medical ID Card"
@@ -97,15 +83,15 @@ get "/" do
 end
 
 post "/cards" do
-  # upload = Upload.new
-  # upload.filepath = params[:image]
-  # upload.save
+
   @card = Card.new(params[:card])
   @card.picture = params[:picture]
   if @card.save
     redirect "cards/#{@card.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
   else
-    redirect "cards/create", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
+    message.each do |attr,msg|
+    redirect "/", :error =>  msg
+    end
   end
 end
 
@@ -139,7 +125,7 @@ end
 post "/addresses" do
   @address = Address.new(params[:address])
   if @address.save
-    redirect "addresses/#{@address.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
+    redirect "addresses/#{@address.id}", :notice => 'Congrats! You Just created your card. (This message will disapear in 4 seconds.)'
   else
     erb :"addresses/create", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
   end
@@ -173,7 +159,7 @@ post "/addresses/charge" do
 
 
    Pony.mail(
-     :from => 'Medical ID One',
+     :from => 'MedicalIDOne@heroku.com',
      :to => 'Jaspreet@garcha.com',
      :subject => "New Medical ID Card Sold",
      :headers => { 'Content-Type' => 'text/html' },
@@ -181,16 +167,17 @@ post "/addresses/charge" do
      "<p>Picture: <img src=#{@card.picture.url} /> #{@card.picture.url}</p>
      <p>Name: #{@card.name} </p>
      <p>Address: #{@card.address1} </p>
-     <p>Address: #{@card.address2} </p>
-     <p>Phone Number: #{@card.phone} </p>
+     <p>City: #{@card.city} </p>
+     <p>State: #{@card.state} </p>
+     <p>Zip: #{@card.zip} </p>
+     <p>Phone Number: #{@card.phone1} </p>
      <p>Date of Birth: #{@card.dob} </p>
      <p>Emergency Contact: #{@card.em_contact} </p>
-     <p>Emergency Phone Number: #{@card.em_phone} </p>
+     <p>Emergency Phone Number: #{@card.phone_em} </p>
      <p>Doctor: #{@card.doctor} </p>
-     <p>Doctors Phone number: #{@card.doc_phone} </p>
+     <p>Doctors Phone number: #{@card.phone_doc} </p>
      <p>Insurance Provider: #{@card.insurance}</p>
      <p>Insurance Information: #{@card.insur_numner} </p>
-     <p>Insurance Phone number: #{@card.insur_phone} </p>
      <p>Medical History: #{@card.medical_history1} </p>
      <p>Medical History: #{@card.medical_history2} </p>
      <p>Medical History: #{@card.medical_history3} </p>
@@ -203,10 +190,11 @@ post "/addresses/charge" do
      <p>Medication: #{@card.medication5} </p>
      <p>Name: #{@address.name}</p>
      <p>Address: #{@address.address}</p>
-     <p>Address: #{@address.address1}</p>
-     <p>Address: #{@address.address2}</p>
+     <p>City: #{@address.city}</p>
+     <p>State: #{@address.state}</p>
+     <p>Zip: #{@address.zip}</p>
      <p>Email Address: #{@address.email}</p>
-     <p>Phone Number: #{@address.phone}</p>",
+     <p>Phone Number: #{@address.phone1}</p>",
      :via => :smtp,
      :via_options => {
         :address          => 'smtp.sendgrid.net',
@@ -221,8 +209,6 @@ post "/addresses/charge" do
     redirect '/addresses/thankyou'
 
 end
-
-
 
 error Stripe::CardError do
   env['sinatra.error'].message

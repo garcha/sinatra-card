@@ -1,8 +1,0 @@
-<ul>
-<% @cards.each do |card| %>
- <li>
-   <h4><a href="/cards/<%= card.id %>"><%= card.name %></a></h4>
-   <p>Created: <%= card.created_at %></p>
- </li>
-<% end %>
-</ul>
