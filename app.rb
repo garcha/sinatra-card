@@ -98,9 +98,13 @@ end
 #view post
 get "/cards/:id" do
  @card = Card.find(params[:id])
- @title = "Shipping address"
- @address = Address.new
- erb :"cards/view"
+ if @card.created_at > 1.hour.ago
+   @title = "Shipping address"
+   @address = Address.new
+   erb :"cards/view"
+ else
+   redirect "/"
+ end
 end
 
 #edit post
