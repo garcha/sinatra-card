@@ -195,7 +195,7 @@ post "/addresses/charge" do
 
 
    Pony.mail(
-     #:from => 'MedicalIDOne@heroku.com',
+     :from => 'MedicalIDOne@heroku.com',
      :to => 'Jaspreet@garcha.com',
      :subject => "New Medical ID Card Sold",
      :headers => { 'Content-Type' => 'text/html' },
