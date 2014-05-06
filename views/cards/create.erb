@@ -1,186 +1,202 @@
 
-  <h2 class="featurette-heading">Create Your Medical Id Card</h2>
+  <h2 class="featurette-heading">Create Your Medical ID Card</h2>
     <form class="form-horizontal" action="/cards" method="POST"  role="form" enctype="multipart/form-data">
+
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="picture" >Picture:</label>
-        <div class="col-sm-4">
-          <input id="picture" type='file' name='card[picture]'>
-        </div>
+          <div class="col-sm-4 fileinput fileinput-new" data-provides="fileinput">
+            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+              <img src="/assets/place.svg" alt="">
+            </div>
+            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+            <div>
+              <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input id="picture" type="file" name="card[picture]"></span>
+              <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+            </div>
+          </div>
       </div>
 
       <div class="form-group">
          <label class="col-sm-2 control-label" for="name">Name:</label>
          <div class="col-sm-5">
-           <input id="name" type='text' class="form-control" name='card[name]'>
+           <input id="name" type='text' class="form-control"  autocompletetype="name" autocapitalize="words" spellcheck="off" required="" placeholder="First and Last Name" name='card[name]'>
          </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="card_phone">Phone Number:</label>
         <div class="col-sm-5">
-          <input id="phone" type='tel' class="form-control" name='card[phone1]'>
+          <input id="phone" type='tel' class="form-control" autocorrect="off" spellcheck="off" required="" placeholder="818 999 1234" name='card[phone1]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="address1">Address:</label>
         <div class="col-sm-5">
-          <input id="address1" type='text' class="form-control" name='card[address1]'>
+          <input id="address1" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" placeholder="Street address" name='card[address1]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="city">City:</label>
         <div class="col-sm-5">
-          <input id="address2" type='text' class="form-control" name='card[city]'>
+          <input id="address2" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" placeholder="City" name='card[city]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="state">State:</label>
         <div class="col-sm-5">
-          <input id="address2" type='text' class="form-control" name='card[state]'>
+          <input id="address2" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" placeholder="State" name='card[state]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="zip">Zip:</label>
         <div class="col-sm-5">
-          <input id="address2" type='text' class="form-control" name='card[zip]'>
+          <input id="address2" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" placeholder="Zip code" name='card[zip]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="dob">Date of Birth:</label>
         <div class="col-sm-5">
-          <input id="dob" type='date' class="form-control" name='card[dob]'>
+          <input id="dob" type='date' class="form-control" autocorrect="off" spellcheck="off" required="" placeholder="04/20/1975" name='card[dob]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="em_contact">Emergency Contact:</label>
         <div class="col-sm-5">
-          <input id="em_contact" type='text' class="form-control" name='card[em_contact]'>
+          <input id="em_contact" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" placeholder="Emergency contact" name='card[em_contact]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="em_phone">Emergency Phone #:</label>
         <div class="col-sm-5">
-          <input id="em_phone" type='tel' class="form-control" name='card[phone_em]'>
+          <input id="em_phone" type='tel' data-format="(ddd) ddd-dddd" placeholder="Emergency phone number" data-placeholder="phone" autocorrect="off" spellcheck="off" required="" class="form-control" name='card[phone_em]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="doctor">Doctor:</label>
         <div class="col-sm-5">
-          <input id="doctor" type='text' class="form-control" name='card[doctor]'>
+          <input id="doctor" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" placeholder="Doctor's name" name='card[doctor]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="doc_phone">Doctor's phone #:</label>
         <div class="col-sm-5">
-          <input id="doc_phone" type='tel' class="form-control" name='card[phone_doc]'>
+          <input id="doc_phone" type='tel' class="form-control" autocorrect="off" spellcheck="off" required="" placeholder="Doctor's phone number" name='card[phone_doc]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="insurance">Insurance provider:</label>
         <div class="col-sm-5">
-          <input id="insurance" type='text' class="form-control" name='card[insurance]'>
+          <input id="insurance" type='text' class="form-control" autocorrect="off" spellcheck="off" required=""  placeholder="Insurance provider" name='card[insurance]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="insur_numner">Insurance id #:</label>
         <div class="col-sm-5">
-          <input id="insur_numner" type='text' class="form-control" name='card[insur_numner]'>
+          <input id="insur_numner" type='text' class="form-control" placeholder="Insurance ID number" name='card[insur_numner]'>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="bloodtype"> Bloodtype:</label>
+        <div class="col-sm-5">
+          <input id="bloodtype" type='text' class="form-control" autocorrect="off" placeholder="Blood type" name='card[bloodtype]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medical_history1">Medical condition:</label>
         <div class="col-sm-5">
-          <input id="medical_history1" type='text' class="form-control" name='card[medical_history1]'>
+          <input id="medical_history1" type='text' class="form-control" placeholder="Medical condition" name='card[medical_history1]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medical_history2">Medical condition:</label>
         <div class="col-sm-5">
-          <input id="medical_history2" type='text' class="form-control" name='card[medical_history2]'>
+          <input id="medical_history2" type='text' class="form-control" placeholder="Medical condition" name='card[medical_history2]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medical_history3">Medical condition:</label>
         <div class="col-sm-5">
-          <input id="medical_history3" type='text' class="form-control" name='card[medical_history3]'>
+          <input id="medical_history3" type='text' class="form-control" placeholder="Medical condition" name='card[medical_history3]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medical_history4">Medical condition:</label>
         <div class="col-sm-5">
-          <input id="medical_history4" type='text' class="form-control" name='card[medical_history4]'>
+          <input id="medical_history4" type='text' class="form-control" placeholder="Medical condition" name='card[medical_history4]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medical_history5">Medical condition:</label>
         <div class="col-sm-5">
-          <input id="medical_history5" type='text' class="form-control" name='card[medical_history5]'>
+          <input id="medical_history5" type='text' class="form-control" placeholder="Medical condition" name='card[medical_history5]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medication1">Medication:</label>
         <div class="col-sm-5">
-          <input id="medication1" type='text' class="form-control" name='card[medication1]'>
+          <input id="medication1" type='text' class="form-control" placeholder="Medication" name='card[medication1]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medication2">Medication:</label>
         <div class="col-sm-5">
-          <input id="medication2" type='text' class="form-control" name='card[medication2]'>
+          <input id="medication2" type='text' class="form-control" placeholder="Medication" name='card[medication2]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medication3">Medication:</label>
         <div class="col-sm-5">
-          <input id="medication3" type='text' class="form-control" name='card[medication3]'>
+          <input id="medication3" type='text' class="form-control" placeholder="Medication" name='card[medication3]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medication4">Medication:</label>
         <div class="col-sm-5">
-          <input id="medication4" type='text' class="form-control" name='card[medication4]'>
+          <input id="medication4" type='text' class="form-control" placeholder="Medication" name='card[medication4]'>
         </div>
       </div>
 
       <div class="form-group">
         <label class="col-sm-2 control-label" for="medication5">Medication:</label>
         <div class="col-sm-5">
-          <input id="medication5" type='text' class="form-control" name='card[medication5]'>
+          <input id="medication5" type='text' class="form-control" placeholder="Medication" name='card[medication5]'>
         </div>
       </div>
     <!--    <div class="form-group">
         <label class="control-label" for="pvc">PVC:</label>
         <input id="pvc" type='boolean' name='card[pvc]'>
       </div> -->
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn btn-success btn-lg btn-block five">Submit</button>
     </form>
     <br>
 </div>
 
 <div class="col-md-5">
-  <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-  <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+  <h2 class="featurette-heading">Medical ID is a great tool <span class="text-muted">for your everyday needs and for emergencies</span></h2>
+  <p class="lead">You are able to create a custom card that lists your medical conditions, allergy information, doctor and emergency contact. The card can be easily carried with you, in inside you wallet and fits perfectly inside the credit cards slots. The cards is great for all everyone for unexpected life emergencies.
+</p>
   <hr class="featurette-divider">
   <img class="img-circle" src="/assets/circle.svg" alt="Generic placeholder image">
   <h2>Heading</h2>

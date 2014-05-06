@@ -2,52 +2,60 @@
   <form class="form-horizontal" action="/cards/<%= @card.id %>" method="POST"  role="form" enctype="multipart/form-data">
   <input type="hidden" name="_method" value="put" >
 
+
     <div class="form-group">
       <label class="col-sm-2 control-label" for="picture" >Picture:</label>
-      <div class="col-sm-4">
-        <input id="picture" type='file' name='card[picture]' value="<img src=<%= @card.picture.url %>">
-      </div>
+        <div class="col-sm-4 fileinput fileinput-new" data-provides="fileinput">
+          <div class="fileinput-new thumbnail">
+            <img src="<%= @card.picture.url %>" alt="">
+          </div>
+          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+          <div>
+            <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input id="picture" type="file" name="card[picture]"></span>
+            <a href="#" class="btn btn-default fileinput-exists" required="" data-dismiss="fileinput">Remove</a>
+          </div>
+        </div>
     </div>
 
     <div class="form-group">
        <label class="col-sm-2 control-label" for="name">Name:</label>
        <div class="col-sm-5">
-         <input id="name" type='text' class="form-control" name='card[name]' value="<%= @card.name %>">
+         <input id="name" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[name]' value="<%= @card.name %>">
        </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label" for="card_phone">Phone Number:</label>
       <div class="col-sm-5">
-        <input id="phone" type='tel' class="form-control" name='card[phone1]' value="<%= @card.phone1 %>">
+        <input id="phone" type='tel' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[phone1]' value="<%= @card.phone1 %>">
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label" for="address1">Address:</label>
       <div class="col-sm-5">
-        <input id="address1" type='text' class="form-control" name='card[address1]' value="<%= @card.address1 %>">
+        <input id="address1" type='text' class="form-control" autocorrect="off" spellcheck="off" required=""name='card[address1]' value="<%= @card.address1 %>">
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label" for="City">City:</label>
       <div class="col-sm-5">
-        <input id="address2" type='text' class="form-control" name='card[city]' value="<%= @card.city %>">
+        <input id="address2" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[city]' value="<%= @card.city %>">
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label" for="State">State:</label>
       <div class="col-sm-5">
-        <input id="address2" type='text' class="form-control" name='card[state]' value="<%= @card.state %>">
+        <input id="address2" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[state]' value="<%= @card.state %>">
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label" for="Zip">Zip:</label>
       <div class="col-sm-5">
-        <input id="address2" type='text' class="form-control" name='card[zip]' value="<%= @card.zip %>">
+        <input id="address2" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[zip]' value="<%= @card.zip %>">
       </div>
     </div>
 
@@ -55,35 +63,35 @@
     <div class="form-group">
       <label class="col-sm-2 control-label" for="dob">Date of Birth:</label>
       <div class="col-sm-5">
-        <input id="dob" type='date' class="form-control" name='card[dob]' value="<%= @card.dob %>">
+        <input id="dob" type='date' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[dob]' value="<%= @card.dob %>">
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label" for="em_contact">Emergency Contact:</label>
       <div class="col-sm-5">
-        <input id="em_contact" type='text' class="form-control" name='card[em_contact]' value="<%= @card.em_contact %>">
+        <input id="em_contact" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[em_contact]' value="<%= @card.em_contact %>">
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label" for="em_phone">Emergency Phone number:</label>
       <div class="col-sm-5">
-        <input id="em_phone" type='tel' class="form-control" name='card[phone_em]' value="<%= @card.phone_em %>">
+        <input id="em_phone" type='tel' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[phone_em]' value="<%= @card.phone_em %>">
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label" for="doctor">Doctor:</label>
       <div class="col-sm-5">
-        <input id="doctor" type='text' class="form-control" name='card[doctor]' value="<%= @card.doctor %>">
+        <input id="doctor" type='text' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[doctor]' value="<%= @card.doctor %>">
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-2 control-label" for="doc_phone">Doctor's phone number:</label>
       <div class="col-sm-5">
-        <input id="doc_phone" type='tel' class="form-control" name='card[phone_doc]' value="<%= @card.phone_doc %>">
+        <input id="doc_phone" type='tel' class="form-control" autocorrect="off" spellcheck="off" required="" name='card[phone_doc]' value="<%= @card.phone_doc %>">
       </div>
     </div>
 
@@ -98,6 +106,13 @@
       <label class="col-sm-2 control-label" for="insur_numner">Insurance id number:</label>
       <div class="col-sm-5">
         <input id="insur_numner" type='text' class="form-control" name='card[insur_numner]' value="<%= @card.insur_numner %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="bloodtype"> Bloodtype:</label>
+      <div class="col-sm-5">
+        <input id="bloodtype" type='text' class="form-control" name='card[bloodtype]' value="<%= @card.bloodtype %>">
       </div>
     </div>
 
@@ -174,7 +189,7 @@
         <label class="control-label" for="pvc">PVC:</label>
         <input id="pvc" type='boolean' name='card[pvc]'>
       </div> -->
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success btn-lg btn-block five">Submit</button>
     </form>
   <br>
 </div>

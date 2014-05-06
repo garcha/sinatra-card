@@ -23,10 +23,10 @@
   </head>
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top header-color">
       <div class="container clearfix">
 
-        <div class="navbar-header">
+        <div class="navbar-header ">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           </button>
           <a class="navbar-brand" href="/">Medical ID One</a>
@@ -42,8 +42,10 @@
       </div>
     </div>
 
-    <div class="container body">
-      <div class="col-md-7 left clearfix">
+    <div class="container">
+      <h1 class="featurette-heading background center">All your medical information at a glance!</h1>
+
+      <div class="col-md-7 left clearfix background">
         <p class="lead">
           <% if flash[:notice] %>
             <p class="alert alert-success"><%= flash[:notice] %></p>

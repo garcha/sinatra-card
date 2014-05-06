@@ -11,9 +11,10 @@ require 'carrierwave_direct'
 require 'haml'
 require 'carrierwave/orm/activerecord'
 require 'pony'
+require 'csv'
 
 
-set :public_dir, File.dirname( __FILE__ ) + '/public'
+set :public, File.dirname( __FILE__ ) + '/public'
 
 set :publishable_key, ENV['PUBLISHABLE_KEY']
 set :secret_key, ENV['SECRET_KEY']
@@ -48,7 +49,7 @@ message = Hash.new
 
 class Card < ActiveRecord::Base
 
-  validates_presence_of :name, :message => "%{value} cannot be Empty."
+  #validates_presence_of :name, :message => "%{value} cannot be Empty."
   #:phone1, :picture, :address1, :city, :state, :zip, :em_contact, :phone_em,
 
   mount_uploader :picture, MyUploader
@@ -57,7 +58,7 @@ end
 class Address < ActiveRecord::Base
   belongs_to :card
 
-  validates_presence_of :name, :email, :address, :city, :state, :zip, :phone1
+  #validates_presence_of :name, :email, :address, :city, :state, :zip, :phone1
 end
 
 class Purchase < ActiveRecord::Base
@@ -87,10 +88,10 @@ post "/cards" do
   @card = Card.new(params[:card])
   @card.picture = params[:picture]
   if @card.save
-    redirect "cards/#{@card.id}", :notice => 'Congrats! Love the new post. (This message will disapear in 4 seconds.)'
+    redirect "cards/#{@card.id}", :notice => 'Great you have created your Medical ID One Card. (This message will disapear in 4 seconds.)'
   else
     message.each do |attr,msg|
-    redirect "/", :error =>  msg
+    redirect "/", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
     end
   end
 end
@@ -98,9 +99,13 @@ end
 #view post
 get "/cards/:id" do
  @card = Card.find(params[:id])
- @title = "Shipping address"
- @address = Address.new
- erb :"cards/view"
+ if @card.created_at > 1.hour.ago
+   @title = "Shipping address"
+   @address = Address.new
+   erb :"cards/view"
+ else
+   redirect "/"
+ end
 end
 
 #edit post
@@ -125,7 +130,7 @@ end
 post "/addresses" do
   @address = Address.new(params[:address])
   if @address.save
-    redirect "addresses/#{@address.id}", :notice => 'Congrats! You Just created your card. (This message will disapear in 4 seconds.)'
+    redirect "addresses/#{@address.id}", :notice => 'Thanks for confirming your shipping address. (This message will disapear in 4 seconds.)'
   else
     erb :"addresses/create", :error => 'Something went wrong. Try again. (This message will disapear in 4 seconds.)'
   end
@@ -141,6 +146,30 @@ get "/addresses/:id" do
   erb :"addresses/view"
 end
 
+#csv report
+# get '/csv' do
+#     content_type 'application/csv'
+#     attachment "myfilename.csv"
+#     @card = Card.last
+#     @address = Address.last
+#     csv_string = CSV.generate do |csv|
+#        csv << ["ID", "Name", "Picture", "Address", "City", "State", "Zip"]
+#        csv << [@card.id, @card.name, @card.picture, @card.address1, @card.city, @card.state, @card.zip]
+#    end
+# end
+
+# def export_to_csv
+#   csv_string = CSV.generate do |csv|
+#       csv << [ "ID", "Name", "Picture", "Address", "City", "State", "Zip"]
+#       @card.each do |card|
+#         csv << [card.id, card.name, card.picture, card.address1, card.city, card.state, card.zip]
+#       end
+#   end
+#   send_data csv_string,
+#   :type => 'text/csv; charset=iso-8859-1; header=present',
+#   :disposition => "attachment; filename=card.csv"
+#
+# end
 
 post "/addresses/charge" do
   # Amount in cents
@@ -157,12 +186,20 @@ post "/addresses/charge" do
    @card = Card.last
    @address = Address.last
 
+   content_type 'application/csv'
+   attachment "myfilename.csv"
+   csv_string = CSV.generate do |csv|
+      csv << ["ID", "Name", "Picture", "Address", "City", "State", "Zip"]
+      csv << [@card.id, @card.name, @card.picture, @card.address1, @card.city, @card.state, @card.zip]
+    end
+
 
    Pony.mail(
      :from => 'MedicalIDOne@heroku.com',
      :to => 'Jaspreet@garcha.com',
      :subject => "New Medical ID Card Sold",
      :headers => { 'Content-Type' => 'text/html' },
+    #  :attachments => {"myfilename.csv" => "myfilename csv"},
      :body =>
      "<p>Picture: <img src=#{@card.picture.url} /> #{@card.picture.url}</p>
      <p>Name: #{@card.name} </p>
@@ -178,6 +215,7 @@ post "/addresses/charge" do
      <p>Doctors Phone number: #{@card.phone_doc} </p>
      <p>Insurance Provider: #{@card.insurance}</p>
      <p>Insurance Information: #{@card.insur_numner} </p>
+     <p>Blood Type: #{@card.bloodtype} </p>
      <p>Medical History: #{@card.medical_history1} </p>
      <p>Medical History: #{@card.medical_history2} </p>
      <p>Medical History: #{@card.medical_history3} </p>
@@ -208,7 +246,7 @@ post "/addresses/charge" do
 
     redirect '/addresses/thankyou'
 
-end
+  end
 
 error Stripe::CardError do
   env['sinatra.error'].message
